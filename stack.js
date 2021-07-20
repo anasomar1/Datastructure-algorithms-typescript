@@ -6,7 +6,7 @@ var StackArray = /** @class */ (function () {
         this.items.push(element);
     };
     StackArray.prototype.removeAtEnd = function () {
-        this.items.pop();
+        return this.items.pop();
     };
     StackArray.prototype.elementAtEnd = function () {
         return this.items[this.items.length - 1];
@@ -55,3 +55,18 @@ var StackObject = /** @class */ (function () {
     };
     return StackObject;
 }());
+var decimalToBinary = function (decNumber) {
+    var remainderStack = new StackArray();
+    var number = decNumber;
+    var remainder;
+    var binaryString = "";
+    while (number > 0) {
+        remainder = Math.floor(number % 2);
+        remainderStack.insertAtEnd(remainder);
+        number = Math.floor(number / 2);
+    }
+    while (!remainderStack.isEmpty()) {
+        binaryString += remainderStack.removeAtEnd().toString();
+    }
+    return binaryString;
+};

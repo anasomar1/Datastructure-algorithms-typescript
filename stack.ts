@@ -7,7 +7,7 @@ class StackArray {
     this.items.push(element);
   }
   removeAtEnd() {
-    this.items.pop();
+    return this.items.pop();
   }
   elementAtEnd() {
     return this.items[this.items.length - 1];
@@ -57,3 +57,22 @@ class StackObject {
     this.count = 0;
   }
 }
+
+const decimalToBinary = function (decNumber: number): string {
+  const remainderStack = new StackArray();
+  let number = decNumber;
+  let remainder: number;
+  let binaryString = "";
+
+  while (number > 0) {
+    remainder = Math.floor(number % 2);
+    remainderStack.insertAtEnd(remainder);
+    number = Math.floor(number / 2);
+  }
+
+  while (!remainderStack.isEmpty()) {
+    binaryString += remainderStack.removeAtEnd().toString();
+  }
+
+  return binaryString;
+};
